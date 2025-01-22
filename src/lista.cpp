@@ -20,7 +20,7 @@ size_t Lista<T>::tamanho() const {
 template <typename T>
 void Lista<T>::imprimir() const {
     for (const auto& elemento : elementos) {
-        elemento.print(); // Assume que T tem um método print()
+        elemento.print();
     }
 }
 
@@ -58,6 +58,5 @@ void ListaOrdenada<T>::ordenarPorPrefixo(const std::string& prefixo) {
               });
 }
 
-// Explicit template instantiation
 template class Lista<Termo>;
 template class ListaOrdenada<Termo>;

@@ -16,9 +16,9 @@ bool Termo::comparaPorPrefixo(const Termo& a, const Termo& b, const std::string&
     bool b_comeca = b.getNome().rfind(prefixo, 0) == 0;
 
     if (a_comeca && b_comeca) {
-        return a.getNome() < b.getNome(); // Se ambos começam, compara lexicograficamente
+        return a.getNome() < b.getNome();
     } else {
-        return a_comeca; // Prioriza o que começa com o prefixo
+        return a_comeca;
     }
 }
 
