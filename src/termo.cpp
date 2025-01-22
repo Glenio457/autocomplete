@@ -1,4 +1,4 @@
-#include "Termo.h" 
+#include "termo.h" 
 #include <algorithm> 
 
 Termo::Termo() : termo(""), peso(0) {}
