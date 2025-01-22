@@ -1,5 +1,6 @@
-#include "../include/autocompletar.h"
 #include <algorithm>
+
+#include "../include/autocompletar.h"
 
 Autocompletar::Autocompletar(const std::vector<Termo>& t) : termos(t) {
     std::sort(termos.begin(), termos.end(), [](const Termo& a, const Termo& b) {
