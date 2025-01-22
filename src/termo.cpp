@@ -1,6 +1,7 @@
-#include "../include/termo.h"
 #include <iostream>
+#include <string>
 
+#include "../include/termo.h"
 Termo::Termo(const std::string& n, long p) : nome(n), peso(p) {}
 
 std::string Termo::getNome() const { return nome; }

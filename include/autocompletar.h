@@ -1,7 +1,6 @@
 #ifndef AUTOCOMPLETAR_H
 #define AUTOCOMPLETAR_H
 
-#include <string>
 #include <vector>
 #include "termo.h"
 

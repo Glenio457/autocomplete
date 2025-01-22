@@ -1,6 +1,11 @@
+#include <iostream>
+#include <stdexcept>
+#include <algorithm>
+#include <stdexcept>
+#include <string>
+
 #include "../include/lista.h"
 #include "../include/termo.h"
-#include <iostream>
 
 template <typename T>
 void Lista<T>::inserir(const T& elemento) {

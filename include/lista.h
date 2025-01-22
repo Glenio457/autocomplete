@@ -2,9 +2,6 @@
 #define LISTA_H
 
 #include <vector>
-#include <stdexcept>
-#include <string>
-#include <algorithm>
 
 template <typename T>
 class Lista {

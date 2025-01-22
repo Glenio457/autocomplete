@@ -1,8 +1,6 @@
 #ifndef TERMO_H
 #define TERMO_H
 
-#include <string>
-
 class Termo {
 private:
     std::string nome;
