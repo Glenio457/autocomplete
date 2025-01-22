@@ -2,7 +2,7 @@ all: bin/autocompletar
 
 bin/autocompletar: bin/main.o bin/autocompletar.o bin/termo.o bin/lista.o
 	mkdir -p bin
-	g++ -o bin/autocompletar bin/main.o bin/autocompletar.o bin/termo.o bin/lista.o
+	g++ -o bin/autocompletar bin/main.o bin/autocompletar.o bin/termo.o bin/lista.o -Wall
 
 bin/main.o: src/main.cpp include/autocompletar.h include/termo.h include/lista.h
 	mkdir -p bin
