@@ -1,24 +1,23 @@
-#ifndef TERMO_H 
+#ifndef TERMO_H
 #define TERMO_H
 
-#include <iostream>
 #include <string>
 
 class Termo {
-    private:
-        std::string termo;
-        long peso;
+private:
+    std::string nome;
+    long peso;
 
-    public:
-        Termo();
-        Termo(std::string termo, long peso);
+public:
+    Termo(const std::string& n, long p);
 
-        static int compararPeloPeso(const Termo& T1, const Termo& T2);
-        static int compararPeloPrefixo(const Termo& T1, const Termo& T2, int r);
+    std::string getNome() const;
+    long getPeso() const;
 
-        bool operator<(const Termo& T2) const;
+    void print() const;
 
-        friend std::ostream& operator<<(std::ostream& out, const Termo& t);
+    static bool comparaPorPrefixo(const Termo& a, const Termo& b, const std::string& prefixo);
+    static bool comparaPorPeso(const Termo& a, const Termo& b);
 };
 
 #endif

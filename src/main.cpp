@@ -4,134 +4,11 @@
 #include <vector>
 #include <algorithm>
 #include <stdexcept> 
+#include "../include/termo.h"
+#include "../include/lista.h"
+#include "../include/autocompletar.h"
 
-class Termo {
-private:
-    std::string nome;
-    uint64_t peso;
-
-public:
-    Termo(const std::string& n, uint64_t p) : nome(n), peso(p) {}
-
-    std::string getNome() const { return nome; }
-    uint64_t getPeso() const { return peso; }
-
-    void print() const {
-        std::cout << peso << "\t" << nome << "\n";
-    }
-
-    static bool comparaPorPrefixo(const Termo& a, const Termo& b, const std::string& prefixo) {
-    bool a_comeca = a.getNome().rfind(prefixo, 0) == 0;
-    bool b_comeca = b.getNome().rfind(prefixo, 0) == 0;
-
-    if (a_comeca && b_comeca) {
-        return a.getNome() < b.getNome(); // Se ambos começam, compara lexicograficamente
-    } else {
-        return a_comeca; // Prioriza o que começa com o prefixo
-    }
-}
-
-    static bool comparaPorPeso(const Termo& a, const Termo& b) {
-        return a.getPeso() > b.getPeso();
-    }
-};
-
-template <typename T>
-class Lista {
-private:
-    std::vector<T> elementos;
-
-public:
-    void inserir(const T& elemento) {
-        elementos.push_back(elemento);
-    }
-
-    size_t tamanho() const {
-        return elementos.size();
-    }
-
-    void imprimir() const {
-        for (const auto& elemento : elementos) {
-            elemento.print(); // Assume que T tem um método print()
-        }
-    }
-
-    T& operator[](size_t indice) {
-        if (indice >= elementos.size()) {
-            throw std::out_of_range("Indice fora do intervalo.");
-        }
-        return elementos[indice];
-    }
-
-    const T& operator[](size_t indice) const {
-        if (indice >= elementos.size()) {
-            throw std::out_of_range("Indice fora do intervalo.");
-        }
-        return elementos[indice];
-    }
-
-    std::vector<T> getElementos() const{
-        return elementos;
-    }
-};
-
-template <typename T>
-class ListaOrdenada : public Lista<T> {
-public:
-    void ordenarSTL(bool crescente = true) {
-        if(crescente){
-            std::sort(this->elementos.begin(), this->elementos.end(), [](const T& a, const T& b){
-                return a.getPeso() < b.getPeso();
-            });
-        }else{
-             std::sort(this->elementos.begin(), this->elementos.end(), [](const T& a, const T& b){
-                return a.getPeso() > b.getPeso();
-            });
-        }
-
-    }
-
-    void ordenarComFuncao(bool (*comparacao)(const T&, const T&)) {
-        std::sort(this->elementos.begin(), this->elementos.end(), comparacao);
-    }
-};
-
-// Classe Autocompletar
-class Autocompletar {
-private:
-    std::vector<Termo> termos;
-
-public:
-    Autocompletar(const std::vector<Termo>& t) : termos(t) {
-        std::sort(termos.begin(), termos.end(), [](const Termo& a, const Termo& b) {
-            return a.getNome() < b.getNome();
-        });
-    }
-
-    std::vector<Termo> buscar(const std::string& prefixo) const {
-        std::vector<Termo> resultados;
-
-        // Busca binária CORRIGIDA
-        auto it_inicio = std::lower_bound(termos.begin(), termos.end(), prefixo, [](const Termo& termo, const std::string& prefixo) {
-            return termo.getNome().compare(0, prefixo.length(), prefixo) < 0;
-        });
-
-        if (it_inicio != termos.end()) {
-            //Encontra o ultimo elemento que começa com o prefixo
-            auto it_fim = std::upper_bound(it_inicio, termos.end(), prefixo, [](const std::string& prefixo, const Termo& termo) {
-                return prefixo.compare(0, prefixo.length(), termo.getNome(), 0, prefixo.length()) < 0;
-            });
-
-            resultados.assign(it_inicio, it_fim);
-
-            std::sort(resultados.begin(), resultados.end(), Termo::comparaPorPeso);
-        }
-
-        return resultados;
-    }
-};
-
-std::vector<Termo> loadTermosFromFile(const std::string& filename) {
+std::vector<Termo> carregarTermos(const std::string& filename) {
     std::vector<Termo> termos;
     std::ifstream file(filename);
     if (!file.is_open()) {
@@ -143,7 +20,7 @@ std::vector<Termo> loadTermosFromFile(const std::string& filename) {
         size_t tabPos = linha.find('\t');
         if (tabPos != std::string::npos) {
             try {
-                uint64_t peso = std::stoull(linha.substr(0, tabPos));
+                long peso = std::stoull(linha.substr(0, tabPos));
                 std::string nome = linha.substr(tabPos + 1);
                 termos.push_back(Termo(nome, peso));
             } catch (const std::exception& e) {
@@ -158,8 +35,6 @@ std::vector<Termo> loadTermosFromFile(const std::string& filename) {
     return termos;
 }
 
-
-
 int main(int argc, char* argv[]) {
     try {
         if (argc < 3) {
@@ -173,7 +48,7 @@ int main(int argc, char* argv[]) {
             throw std::runtime_error("O valor de k deve ser um inteiro positivo.");
         }
 
-        auto termos_vector = loadTermosFromFile(filename);
+        auto termos_vector = carregarTermos(filename);
         Autocompletar autocompletar(termos_vector);
 
         while (true) {

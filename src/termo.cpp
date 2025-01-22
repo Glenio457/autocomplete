@@ -1,30 +1,26 @@
-#include "termo.h" 
-#include <algorithm> 
+#include "../include/termo.h"
+#include <iostream>
 
-Termo::Termo() : termo(""), peso(0) {}
+Termo::Termo(const std::string& n, long p) : nome(n), peso(p) {}
 
-Termo::Termo(std::string termo, long peso) : termo(termo), peso(peso) {}
+std::string Termo::getNome() const { return nome; }
+long Termo::getPeso() const { return peso; }
 
-int Termo::compararPeloPeso(const Termo& T1, const Termo& T2) {
-    if (T1.peso > T2.peso) return 1;
-    if (T1.peso < T2.peso) return -1;
-    return 0;
+void Termo::print() const {
+    std::cout << peso << "\t" << nome << "\n";
 }
 
-int Termo::compararPeloPrefixo(const Termo& T1, const Termo& T2, int r) {
-    std::string prefixo1 = T1.termo.substr(0, std::min((int)T1.termo.length(), r));
-    std::string prefixo2 = T2.termo.substr(0, std::min((int)T2.termo.length(), r));
+bool Termo::comparaPorPrefixo(const Termo& a, const Termo& b, const std::string& prefixo) {
+    bool a_comeca = a.getNome().rfind(prefixo, 0) == 0;
+    bool b_comeca = b.getNome().rfind(prefixo, 0) == 0;
 
-    if (prefixo1 < prefixo2) return -1;
-    if (prefixo1 > prefixo2) return 1;
-    return 0;
+    if (a_comeca && b_comeca) {
+        return a.getNome() < b.getNome(); // Se ambos começam, compara lexicograficamente
+    } else {
+        return a_comeca; // Prioriza o que começa com o prefixo
+    }
 }
 
-bool Termo::operator<(const Termo& T2) const {
-    return termo < T2.termo;
-}
-
-std::ostream& operator<<(std::ostream& out, const Termo& t) {
-    out << "(" << t.termo << ", " << t.peso << ")";
-    return out;
+bool Termo::comparaPorPeso(const Termo& a, const Termo& b) {
+    return a.getPeso() > b.getPeso();
 }

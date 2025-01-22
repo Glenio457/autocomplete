@@ -2,21 +2,29 @@
 #define LISTA_H
 
 #include <vector>
+#include <stdexcept>
+#include <string>
+#include <algorithm>
 
-template <class T> 
-    class lista{
-        protected:
-            std::vector<T> elementos;
-        public:
-            void inserir(const T& elemento);
-            size_t tamanho() const;
-            void imprimir() const;
+template <typename T>
+class Lista {
+protected:
+    std::vector<T> elementos;
+
+public:
+    void inserir(const T& elemento);
+    size_t tamanho() const;
+    void imprimir() const;
+    T& operator[](size_t indice);
+    const T& operator[](size_t indice) const;
+    std::vector<T> getElementos() const;
 };
 
-template <class T>
-class listaOrdenada : public lista<T>{
-    public:
-        void ordenar();
-        void ordenar(bool (*comparador)(const T&, const T&));
+template <typename T>
+class ListaOrdenada : public Lista<T> {
+public:
+    void ordenarPorPeso();
+    void ordenarPorPrefixo(const std::string& prefixo);
 };
+
 #endif
