@@ -6,12 +6,7 @@ Veja abaixo os exemplos citados:
 
 ![alt text](image.png)
 
-Nestes exemplos, a aplicação prevê a probabilidade de o usuário digitar cada consulta e apresenta ao usuário uma lista das principais consultas correspondentes, em ordem decrescente de peso. Esses pesos são determinados por dados históricos, como receitas de bilheteria de filmes, frequências de consultas de pesquisa de outros usuários do Google ou histórico de digitação de um usuário de telefone celular. Para efeitos desta atribuição, você terá acesso a um conjunto de todas as termos possíveis e pesos associados (e essas consultas e pesos não serão alterados).
-
-O desempenho da funcionalidade de preenchimento automático é fundamental em muitos sistemas. Por exemplo, considere um mecanismo de pesquisa que executa um aplicativo de preenchimento automático em um _datacenter_. Para que o usuário tenha uma boa experiência ao usar a aplicação, ela deve retornar as sugestões em cerca de 50ms! Além disso, em princípio, essa função deve realizar esse cálculo para cada pressionamento de tecla digitado na barra de pesquisa e para cada usuário!
-
-Nesta tarefa, você implementará o preenchimento automático ordenando todos os termos possíveis de consulta; irá utilizar pesquisa binária para encontrar todas as correspondências que começam com um determinado prefixo; e por fim ordenando os termos correspondentes por peso.
-
+Nestes exemplos, a aplicação prevê a probabilidade de o usuário digitar cada consulta e apresenta ao usuário uma lista das principais consultas correspondentes, em ordem decrescente de peso. Esses pesos são determinados por dados históricos, como receitas de bilheteria de filmes, frequências de consultas de pesquisa de outros usuários do Google ou histórico de digitação de um usuário de telefone celular. Para efeitos desta atribuição, foram utilizados bancos de dados com pesos específicos.
 
 ## Execução do programa
 
