@@ -1,6 +1,4 @@
-# Projeto Final: Recurso de autocompletar
-
-Escreva um programa para implementar o preenchimento automático (também conhecido como _autocomplete_) para um determinado conjunto de $N$ termos, onde um termo é representado por uma _string_ e um peso não negativo associado. Ou seja, dado um prefixo, encontre todas os termos que começam com o prefixo fornecido, em ordem decrescente de peso.
+Recurso de autocompletar
 
 A função de auto-completar é extremamente comum em aplicações modernas. À medida que o usuário digita, o programa prevê a consulta completa (normalmente uma palavra ou frase) que o usuário pretende digitar. O preenchimento automático é mais eficaz quando há um número limitado de consultas prováveis. Por exemplo, o [Internet Movie Database](https://www.imdb.com/) o utiliza para exibir os nomes dos filmes conforme o usuário digita; os mecanismos de pesquisa o utilizam para exibir sugestões conforme o usuário insere consultas de pesquisa na _web_; os telefones celulares o utilizam para agilizar o processo de entrada de texto.
 
