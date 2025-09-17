@@ -15,9 +15,9 @@ Nesta tarefa, você implementará o preenchimento automático ordenando todos os
 
 ## Execução do programa
 
-Quando você executar o seu programa, ele deve receber como parâmetros posicionais o *dataset* desejado e um valor inteiro `k`. Esse valor inteiro limita a quantidade de retorno de termos do seu recurso de autocompletar para `k` termos caso ele retorne um valor maior ou igual a `k`.
+Quando você executar o programa, ele irá receber como parâmetros posicionais o *dataset* desejado e um valor inteiro `k`. Esse valor inteiro limita a quantidade de retorno de termos do recurso de autocompletar para `k` termos caso ele retorne um valor maior ou igual a `k`.
 
-Seu programa deve então permitir que o usuário entre com a consulta desejada, e então apertar `<ENTER>` para realizar a etapa de preenchimento automático. O programa deve retornar os `k` termos que casaram com o prefixo informado, ordenado por peso. Ele pode repetir o processo quantas vezes quiser, até que seja enviado a palavra `sair`, que encerra a execução do programa. Veja um exemplo de execução e interação com o programa:
+O programa, então permite que o usuário entre com a consulta desejada, e então apertar `<ENTER>` para realizar a etapa de preenchimento automático. O programa retorna os `k` termos que casaram com o prefixo informado, ordenado por peso. Ele pode repetir o processo quantas vezes quiser, até que seja enviado a palavra `sair`, que encerra a execução do programa. Veja um exemplo de execução e interação com o programa:
 
 ```bash
 $ ./bin/autocompletar datasets/actors.txt 10
